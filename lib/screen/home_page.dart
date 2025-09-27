@@ -31,70 +31,124 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Image.asset(
+
+      body: CustomScrollView(
+        slivers: [
+          // Banner di atas
+          SliverToBoxAdapter(
+            child: Image.asset(
               "assets/images/home_img.jpg",
               width: double.infinity,
               height: 200,
               fit: BoxFit.cover,
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    // menentukan aturan grid
-                    crossAxisCount: 2, // ngefix jumlah kolom
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                  ),
-                  itemBuilder: (context, index) {
-                    return _foodApp(context, index);
-                  },
-                  itemCount: foodList
-                      .length, // menghitung berapa data yang ada di game list
-                ),
+          ),
+
+          // Grid
+          SliverPadding(
+            padding: EdgeInsets.all(16),
+            sliver: SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => _foodApp(context, index),
+                childCount: foodList.length,
+              ),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 0.8,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _foodApp(context, index) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return DetailPage(index: index);
-            },
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(81, 0, 0, 0),
+            blurRadius: 6,
+            offset: Offset(2, 4),
           ),
-        );
-      },
-      child: Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 238, 209, 207),
-          border: Border.all(width: 2),
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Column(
-          children: [
-            ClipRRect(
-              // borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(foodList[index].imageUrl[0]),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // gambar 1:1
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Image.asset(foodList[index].imageUrl, fit: BoxFit.cover),
+              ),
             ),
-            Text(foodList[index].name),
-            Text("Deskripsi: ${foodList[index].description}"),
-            Text("Harga: ${foodList[index].price}"),
-          ],
-        ),
+          ),
+
+          // teks + tombol
+          Padding(
+            padding: EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  foodList[index].name,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 6),
+                Text(
+                  foodList[index].description,
+                  style: TextStyle(fontSize: 12, color: Colors.black87),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "Rp ${foodList[index].price}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                    color: Colors.brown,
+                  ),
+                ),
+                SizedBox(height: 12),
+
+                // tombol pesan
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.brown,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPage(index: index),
+                        ),
+                      );
+                    },
+                    child: Text("Pesan"),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
