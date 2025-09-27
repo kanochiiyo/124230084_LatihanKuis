@@ -22,9 +22,9 @@ class _LoginPageState extends State<LoginPage> {
     if (_usernameController.text == username &&
         _passwordController.text == password) {
       // using pushReplacement so user cant go back to login screen unless pressing logout button
-      Navigator.of(
-        context,
-      ).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => HomePage(user: username)),
+      );
     }
   }
 
@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
               controller: _usernameController,
               decoration: InputDecoration(
                 labelText: "Username",
-                labelStyle: TextStyle(color: Color(0xFF5D4037)),
+                labelStyle: TextStyle(color: Color(0xFF8D6E63)),
                 prefixIcon: Icon(Icons.person, color: Color(0xFF795548)),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -49,10 +49,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  borderSide: BorderSide(color: Color(0xFF5D4037), width: 2),
+                  borderSide: BorderSide(color: Color(0xFF8D6E63), width: 2),
                 ),
               ),
-              cursorColor: Color(0xFF5D4037),
+              cursorColor: Color(0xFF8D6E63),
               style: TextStyle(color: Color(0xFF3E2723)),
             ),
             SizedBox(height: 16),
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               obscureText: true,
               decoration: InputDecoration(
                 labelText: "Password",
-                labelStyle: TextStyle(color: Color(0xFF5D4037)),
+                labelStyle: TextStyle(color: Color(0xFF8D6E63)),
                 prefixIcon: Icon(Icons.lock, color: Color(0xFF795548)),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -69,16 +69,16 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  borderSide: BorderSide(color: Color(0xFF5D4037), width: 2),
+                  borderSide: BorderSide(color: Color(0xFF8D6E63), width: 2),
                 ),
               ),
-              cursorColor: Color(0xFF5D4037),
+              cursorColor: Color(0xFF8D6E63),
               style: TextStyle(color: Color(0xFF3E2723)),
             ),
             SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF5D4037),
+                backgroundColor: Color(0xFF3E2723),
                 foregroundColor: Colors.white,
               ),
               onPressed: _login,
