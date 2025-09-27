@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latkuis/auth/login_page.dart';
 import 'package:latkuis/data/food_app_data.dart';
-import 'package:latkuis/screen/detail_page.dart';
+import 'package:latkuis/screen/order_page.dart';
 
 class HomePage extends StatelessWidget {
   final String user;
@@ -105,12 +105,6 @@ class HomePage extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 6),
-                Text(
-                  foodList[index].description,
-                  style: TextStyle(fontSize: 12, color: Colors.black87),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
                 SizedBox(height: 8),
                 Text(
                   "Rp ${foodList[index].price}",
@@ -138,7 +132,7 @@ class HomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailPage(index: index),
+                          builder: (context) => OrderPage(index: index),
                         ),
                       );
                     },
