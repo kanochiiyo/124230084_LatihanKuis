@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF8D6E63),
         foregroundColor: Colors.white,
-        title: Text("Halo @$user"),
+        title: Text("Halo $user"),
         actions: [
           IconButton(
             onPressed: () {
@@ -34,13 +34,26 @@ class HomePage extends StatelessWidget {
 
       body: CustomScrollView(
         slivers: [
-          // Banner di atas
           SliverToBoxAdapter(
             child: Image.asset(
               "assets/images/home_img.jpg",
               width: double.infinity,
               height: 200,
               fit: BoxFit.cover,
+            ),
+          ),
+
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Text(
+                "Mau makan apa hari ini?",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown[800],
+                ),
+              ),
             ),
           ),
 

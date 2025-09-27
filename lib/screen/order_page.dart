@@ -22,39 +22,76 @@ class _OrderPageState extends State<OrderPage> {
         foregroundColor: Colors.white,
         title: Text("Order Page"),
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Image.asset(
-                foodList[widget.index].imageUrl,
-                width: double.infinity,
-                height: 300,
-                fit: BoxFit.cover,
-              ),
-              Text(foodList[widget.index].name),
-              Text(foodList[widget.index].description),
-              Text("Rp ${foodList[widget.index].price}"),
-              SizedBox(height: 20),
-              _qtyField(),
-              SizedBox(height: 20),
-              _checkOutButton(),
-
-              showTotal
-                  ? Padding(
-                      padding: EdgeInsets.all(20),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 8,
+          shadowColor: Colors.brown.shade200,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    foodList[widget.index].imageUrl,
+                    height: 250,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  foodList[widget.index].name,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.brown[800],
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  foodList[widget.index].description,
+                  style: TextStyle(fontSize: 16, color: Colors.brown[600]),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "Rp ${foodList[widget.index].price}",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.brown[900],
+                  ),
+                ),
+                SizedBox(height: 16),
+                _qtyField(),
+                SizedBox(height: 16),
+                _checkOutButton(),
+                if (showTotal)
+                  Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Container(
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.brown.shade50,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       child: Text(
                         "Total: Rp $total",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          color: Colors.black,
+                          color: Colors.brown[800],
                         ),
                       ),
-                    )
-                  : SizedBox.shrink(),
-            ],
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

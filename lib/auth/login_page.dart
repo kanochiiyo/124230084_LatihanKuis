@@ -25,6 +25,13 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => HomePage(user: username)),
       );
+    } else {
+      SnackBar snackBar = SnackBar(
+        content: Text("Username atau password salah!"),
+        backgroundColor: Colors.red,
+        duration: Duration(seconds: 2),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 
@@ -37,6 +44,12 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Image.asset(
+              "assets/images/logo.png",
+              height: 220,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(height: 16),
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(
