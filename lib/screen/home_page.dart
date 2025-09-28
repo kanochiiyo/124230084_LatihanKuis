@@ -34,6 +34,7 @@ class HomePage extends StatelessWidget {
 
       body: CustomScrollView(
         slivers: [
+          // banner img
           SliverToBoxAdapter(
             child: Image.asset(
               "assets/images/home_img.jpg",
@@ -43,6 +44,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
+          // heading text
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(16),
@@ -57,7 +59,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-          // Grid
+          // items grid
           SliverPadding(
             padding: EdgeInsets.all(16),
             sliver: SliverGrid(
@@ -94,7 +96,6 @@ class HomePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // gambar 1:1
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -105,7 +106,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-          // teks + tombol
           Padding(
             padding: EdgeInsets.all(12),
             child: Column(
@@ -114,10 +114,7 @@ class HomePage extends StatelessWidget {
                 Text(
                   foodList[index].name,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 6),
                 SizedBox(height: 8),
                 Text(
                   "Rp ${foodList[index].price}",
@@ -128,8 +125,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 12),
-
-                // tombol pesan
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
